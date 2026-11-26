@@ -1,5 +1,7 @@
 # gta6-race-rss
 
+> **Archived:** scheduled updates are disabled; `feed.xml` is no longer refreshed.
+
 Unofficial RSS 2.0 feed of the [updates log](https://vuyp.github.io/gta6-pc-race/#updates)
 of the GTA VI PC race site, which has no feed of its own.
 
