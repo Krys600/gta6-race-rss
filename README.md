@@ -21,3 +21,18 @@ of the GTA VI PC race site, which has no feed of its own.
 python3 scripts/build_feed.py                       # live page -> feed.xml
 python3 scripts/build_feed.py page.html out.xml     # local file
 ```
+
+## Reliable scheduling (optional)
+
+GitHub's `schedule` trigger is best effort: on low-traffic repositories, runs are often
+delayed or skipped. For updates every 15 minutes, call the `workflow_dispatch` endpoint
+from an external scheduler (for example cron-job.org):
+
+- Method/URL: `POST https://api.github.com/repos/Krys600/gta6-race-rss/actions/workflows/update-feed.yml/dispatches`
+- Headers: `Authorization: Bearer <token>`, `Accept: application/vnd.github+json`,
+  `Content-Type: application/json`
+- Body: `{"ref":"main"}` (a successful call returns HTTP 204)
+- Token: a fine-grained personal access token limited to this repository, with only
+  **Actions: Read and write**. Store it in the scheduler, never in this repository.
+
+The built-in `schedule` stays as a fallback; the `concurrency` group prevents overlapping runs.
